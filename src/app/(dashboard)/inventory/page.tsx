@@ -27,6 +27,7 @@ import {
   BarChart3,
   PieChart,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function InventoryPage() {
   const [inventory, setInventory] = useState<Inventory[]>([]);
@@ -352,6 +353,7 @@ export default function InventoryPage() {
   });
 
   return (
+    <ProtectedRoute permission="view_inventory">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -699,5 +701,6 @@ export default function InventoryPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

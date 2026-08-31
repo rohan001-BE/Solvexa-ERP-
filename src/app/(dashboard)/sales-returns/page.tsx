@@ -5,6 +5,7 @@ import { salesService } from "@/services/sales.service";
 import { SaleReturn, Sale } from "@/types/database.types";
 import { DataTable, Column } from "@/components/ui/data-table";
 import { RotateCcw, Plus, X, Loader2, AlertCircle } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function SalesReturnsPage() {
   const [returns, setReturns] = useState<SaleReturn[]>([]);
@@ -126,6 +127,7 @@ export default function SalesReturnsPage() {
   ];
 
   return (
+    <ProtectedRoute permission="return_sales">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -251,5 +253,6 @@ export default function SalesReturnsPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

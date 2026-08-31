@@ -2,6 +2,7 @@
 
 import React from "react";
 import { usePermissions } from "@/lib/permissions/use-permissions";
+import { getDefaultRoute } from "@/lib/permissions/route-permissions";
 import { ShieldAlert, Loader2 } from "lucide-react";
 import Link from "next/link";
 
@@ -44,10 +45,10 @@ export function ProtectedRoute({
         </p>
         <div className="mt-6">
           <Link
-            href="/dashboard"
+            href={getDefaultRoute(permissions, role === "Admin")}
             className="inline-flex items-center gap-2 px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white text-xs font-semibold rounded-xl shadow-sm transition-all"
           >
-            Return to Dashboard
+            Go to Allowed Page
           </Link>
         </div>
       </div>

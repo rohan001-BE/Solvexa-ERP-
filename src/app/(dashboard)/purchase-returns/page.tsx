@@ -19,6 +19,7 @@ import {
   TrendingDown,
 } from "lucide-react";
 import Link from "next/link";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function PurchaseReturnsPage() {
   const [returns, setReturns] = useState<PurchaseReturn[]>([]);
@@ -169,6 +170,7 @@ export default function PurchaseReturnsPage() {
   ];
 
   return (
+    <ProtectedRoute permission="return_purchases">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -323,5 +325,6 @@ export default function PurchaseReturnsPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

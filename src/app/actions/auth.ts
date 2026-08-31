@@ -3,6 +3,22 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getUserPermissions } from "@/lib/permissions/get-user-permissions";
+import { getDefaultRoute } from "@/lib/permissions/route-permissions";
+
+async function redirectAfterAuth() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  const { permissions, isAdmin } = await getUserPermissions(user.id, user.email);
+  redirect(getDefaultRoute(permissions, isAdmin));
+}
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -24,7 +40,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  await redirectAfterAuth();
 }
 
 export async function signup(formData: FormData) {
@@ -55,7 +71,7 @@ export async function signup(formData: FormData) {
   // If user is immediately signed in (email confirmations disabled)
   if (data?.session) {
     revalidatePath("/", "layout");
-    redirect("/dashboard");
+    await redirectAfterAuth();
   }
 
   return {

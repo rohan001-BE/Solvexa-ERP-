@@ -21,6 +21,7 @@ import {
   Activity,
   Layers,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function ReportsPage() {
   const [loading, setLoading] = useState(true);
@@ -440,6 +441,7 @@ export default function ReportsPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_reports">
     <div className="space-y-7">
       {/* Header with Multi-Export Toolbar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -795,5 +797,6 @@ export default function ReportsPage() {
         />
       )}
     </div>
+    </ProtectedRoute>
   );
 }

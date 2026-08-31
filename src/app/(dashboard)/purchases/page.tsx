@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function PurchasesPage() {
   const [purchases, setPurchases] = useState<Purchase[]>([]);
@@ -292,6 +293,7 @@ export default function PurchasesPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_purchases">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -759,5 +761,6 @@ export default function PurchasesPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

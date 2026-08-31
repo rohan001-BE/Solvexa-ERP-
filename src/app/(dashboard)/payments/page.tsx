@@ -19,6 +19,7 @@ import {
   TrendingDown,
   DollarSign,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function PaymentsPage() {
   const [payments, setPayments] = useState<Payment[]>([]);
@@ -188,6 +189,7 @@ export default function PaymentsPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_payments">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -463,5 +465,6 @@ export default function PaymentsPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

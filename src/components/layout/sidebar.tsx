@@ -87,17 +87,25 @@ interface SidebarProps {
   userRole?: string | null;
   userName?: string | null;
   userPermissions?: string[];
+  isAdmin?: boolean;
 }
 
-export function Sidebar({ userEmail, userRole, userName, userPermissions = [] }: SidebarProps) {
+export function Sidebar({
+  userEmail,
+  userRole,
+  userName,
+  userPermissions = [],
+  isAdmin = false,
+}: SidebarProps) {
   const pathname = usePathname();
 
-  // Filter sections and items based on permissions
   const filteredSections = navSections
     .map((section) => {
-      const filteredItems = section.items.filter(
-        (item) => !item.permission || userPermissions.includes(item.permission)
-      );
+      const filteredItems = section.items.filter((item) => {
+        if (!item.permission) return true;
+        if (isAdmin) return true;
+        return userPermissions.includes(item.permission);
+      });
       return { ...section, items: filteredItems };
     })
     .filter((section) => section.items.length > 0);

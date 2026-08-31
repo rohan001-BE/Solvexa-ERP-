@@ -31,6 +31,7 @@ import {
   ChevronRight,
   SlidersHorizontal,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -405,7 +406,8 @@ export default function ProductsPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <ProtectedRoute permission="view_products">
+      <div className="space-y-6">
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -858,6 +860,7 @@ export default function ProductsPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </ProtectedRoute>
   );
 }

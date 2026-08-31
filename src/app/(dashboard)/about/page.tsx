@@ -14,9 +14,11 @@ import {
   ArrowRight,
   Store,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function AboutPage() {
   return (
+    <ProtectedRoute permission="view_dashboard">
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
       {/* Header Banner */}
       <div className="relative overflow-hidden solvexa-banner-dark p-8 sm:p-12 text-white">
@@ -144,5 +146,6 @@ export default function AboutPage() {
         </Link>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

@@ -26,6 +26,7 @@ import {
   ShieldCheck,
   Check,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function SuppliersPage() {
   const [suppliers, setSuppliers] = useState<EnrichedSupplier[]>([]);
@@ -268,6 +269,7 @@ export default function SuppliersPage() {
   const selectedTotalPaid = supplierPayments.reduce((sum, pm) => sum + Number(pm.amount || 0), 0);
 
   return (
+    <ProtectedRoute permission="view_suppliers">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -760,5 +762,6 @@ export default function SuppliersPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

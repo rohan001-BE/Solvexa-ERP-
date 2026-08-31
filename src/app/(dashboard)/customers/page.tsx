@@ -5,6 +5,7 @@ import { customersService } from "@/services/customers.service";
 import { Customer } from "@/types/database.types";
 import { DataTable, Column } from "@/components/ui/data-table";
 import { Users, Plus, Phone, Mail, MapPin, X, Loader2, Edit2, ShieldAlert, CreditCard } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function CustomersPage() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -158,6 +159,7 @@ export default function CustomersPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_customers">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -353,5 +355,6 @@ export default function CustomersPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

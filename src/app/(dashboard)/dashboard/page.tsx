@@ -27,6 +27,7 @@ import {
   Compass,
 } from "lucide-react";
 import Link from "next/link";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 interface DashboardMetrics {
   today_sales: number;
@@ -137,7 +138,8 @@ export default function DashboardPage() {
   const isAccountant = userRole === "Accountant";
 
   return (
-    <div className="space-y-7">
+    <ProtectedRoute permission="view_dashboard">
+      <div className="space-y-7">
       {/* 3rd-Generation Top Executive Role Banner */}
       <div className="solvexa-banner-dark p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
         <div className="space-y-2 text-center md:text-left z-10">
@@ -571,6 +573,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </ProtectedRoute>
   );
 }

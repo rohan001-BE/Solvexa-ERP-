@@ -22,6 +22,7 @@ import {
   BarChart3,
   PieChart,
 } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -212,6 +213,7 @@ export default function CategoriesPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_categories">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -524,5 +526,6 @@ export default function CategoriesPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

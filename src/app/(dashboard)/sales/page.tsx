@@ -22,6 +22,7 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function SalesPage() {
   const [sales, setSales] = useState<Sale[]>([]);
@@ -214,6 +215,7 @@ export default function SalesPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_sales">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -497,5 +499,6 @@ export default function SalesPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }

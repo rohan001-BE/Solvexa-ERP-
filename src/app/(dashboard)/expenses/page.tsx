@@ -5,6 +5,7 @@ import { expensesService } from "@/services/expenses.service";
 import { Expense, ExpenseCategory, PaymentMethod } from "@/types/database.types";
 import { DataTable, Column } from "@/components/ui/data-table";
 import { Receipt, Plus, X, Loader2, DollarSign, TrendingDown } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export default function ExpensesPage() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -114,6 +115,7 @@ export default function ExpensesPage() {
   ];
 
   return (
+    <ProtectedRoute permission="view_expenses">
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -294,5 +296,6 @@ export default function ExpensesPage() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }
