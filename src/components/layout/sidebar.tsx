@@ -122,9 +122,9 @@ export function Sidebar({
         title="Go to Solxa Home Page"
         className="h-16 px-4 flex items-center gap-3 border-b border-purple-100 bg-gradient-to-r from-purple-50/80 via-white to-amber-50/50 hover:bg-purple-50 transition-colors group cursor-pointer"
       >
-        <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-2xs flex items-center justify-center flex-shrink-0 p-1 group-hover:scale-105 transition-transform">
+        <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center flex-shrink-0 p-1 group-hover:scale-105 transition-transform">
           <Image
-            src="/solxa-no-bg.png"
+            src="/logo.png"
             alt="Solxa Logo"
             width={38}
             height={38}

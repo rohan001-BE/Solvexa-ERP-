@@ -36,9 +36,9 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2.5 group transition-transform duration-150 active:scale-95"
         >
-          <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-2xs flex items-center justify-center p-1 flex-shrink-0">
+          <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1 flex-shrink-0">
             <Image
-              src="/solxa-no-bg.png"
+              src="/logo.png"
               alt="Solxa Logo"
               width={38}
               height={38}

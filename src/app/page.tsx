@@ -68,23 +68,23 @@ export default async function HomePage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+            <div className="relative w-12 h-12 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform">
               <Image
                 src="/logo.png"
-                alt="Solvexa Logo"
-                width={40}
-                height={40}
+                alt="Solxa Logo"
+                width={44}
+                height={44}
                 className="object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
               <span className="font-black text-purple-950 tracking-tight text-lg flex items-center gap-1">
-                <span>Solvexa</span>
-                <span className="text-amber-600 font-black">Store</span>
+                <span>Solxa</span>
+                <span className="text-amber-600 font-black">Grocery</span>
               </span>
               <span className="text-[10px] text-purple-700 font-bold tracking-widest uppercase font-mono">
-                Supermarket &amp; Grocery ERP
+                Store &amp; Supermarket ERP
               </span>
             </div>
           </Link>
