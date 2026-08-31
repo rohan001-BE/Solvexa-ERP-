@@ -137,19 +137,41 @@ export default function ExpensesPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="solvexa-card p-4 space-y-1 border-rose-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Overheads Logged</span>
-          <p className="text-2xl font-black text-rose-800 font-mono">
-            Rs. {totalSum.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </p>
-          <span className="text-[10px] text-slate-500">Directly accounted in Net P&amp;L</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-rose-600 via-red-500 to-orange-600 shadow-xl shadow-rose-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-rose-100/80">Total Overheads</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">
+                Rs. {totalSum.toLocaleString(undefined, { minimumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+              <span className="font-black text-sm text-rose-100">PKR</span>
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-rose-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <TrendingDown className="w-3 h-3 text-rose-200" />
+            <span>Directly accounted in Net P&amp;L</span>
+          </div>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Overhead Categories</span>
-          <p className="text-2xl font-black text-purple-950 font-mono">{categories.length}</p>
-          <span className="text-[10px] text-purple-800 font-bold">Standardized expense heads</span>
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 shadow-xl shadow-purple-900/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-purple-200/80">Expense Categories</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">{categories.length}</p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+               <Receipt className="w-5 h-5 text-purple-100" />
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-purple-200/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <Receipt className="w-3 h-3 text-purple-300" />
+            <span>Standardized expense heads</span>
+          </div>
         </div>
       </div>
 
