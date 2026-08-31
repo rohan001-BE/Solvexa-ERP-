@@ -325,29 +325,62 @@ export default function PurchasesPage() {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Inward Purchase Volume</span>
-          <p className="text-2xl font-black text-amber-950 font-mono">
-            Rs. {totalPurchaseCost.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </p>
-          <span className="text-[10px] text-slate-500 font-mono">{purchases.length} inward stock invoices</span>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-amber-600 via-orange-500 to-rose-600 shadow-xl shadow-amber-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-amber-100/80">Inward Purchase Volume</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">
+                Rs. {totalPurchaseCost.toLocaleString(undefined, { minimumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+               <span className="font-black text-sm text-amber-100">PKR</span>
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-amber-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <Layers className="w-3 h-3 text-amber-200" />
+            <span>{purchases.length} inward stock invoices</span>
+          </div>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Paid to Distributors</span>
-          <p className="text-2xl font-black text-emerald-900 font-mono">
-            Rs. {totalPaidToSuppliers.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </p>
-          <span className="text-[10px] text-emerald-800 font-bold">Settled vendor payments</span>
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 shadow-xl shadow-emerald-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-emerald-100/80">Paid to Distributors</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">
+                Rs. {totalPaidToSuppliers.toLocaleString(undefined, { minimumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+               <span className="font-black text-sm text-emerald-100">PKR</span>
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-emerald-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <CheckCircle2 className="w-3 h-3 text-emerald-200" />
+            <span>Settled vendor payments</span>
+          </div>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-rose-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Outstanding Payables Due</span>
-          <p className="text-2xl font-black text-rose-800 font-mono">
-            Rs. {totalDueToSuppliers.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </p>
-          <span className="text-[10px] text-rose-700 font-bold">Unsettled vendor debt</span>
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-rose-600 via-red-500 to-orange-600 shadow-xl shadow-rose-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-rose-100/80">Outstanding Payables</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">
+                Rs. {totalDueToSuppliers.toLocaleString(undefined, { minimumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+               <span className="font-black text-sm text-rose-100">PKR</span>
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-rose-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <AlertCircle className="w-3 h-3 text-rose-200" />
+            <span>Unsettled vendor debt</span>
+          </div>
         </div>
       </div>
 
