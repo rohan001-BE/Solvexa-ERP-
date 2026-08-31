@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
         <div className="flex flex-col items-center gap-2">
           <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-md flex items-center justify-center p-1">
             <Image
-              src="/logo.png"
+              src="/solxa-no-bg.png?v=2"
               alt="Solxa Logo"
               width={52}
               height={52}

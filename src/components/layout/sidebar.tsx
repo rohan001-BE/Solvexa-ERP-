@@ -124,7 +124,7 @@ export function Sidebar({
       >
         <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center flex-shrink-0 p-1 group-hover:scale-105 transition-transform">
           <Image
-            src="/logo.png"
+            src="/solxa-no-bg.png?v=2"
             alt="Solxa Logo"
             width={38}
             height={38}
