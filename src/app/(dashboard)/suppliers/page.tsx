@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { suppliersService } from "@/services/suppliers.service";
+import { suppliersService, EnrichedSupplier } from "@/services/suppliers.service";
 import { paymentsService } from "@/services/payments.service";
 import { Supplier, Purchase, Payment, PaymentMethod } from "@/types/database.types";
 import { DataTable, Column } from "@/components/ui/data-table";
@@ -23,10 +23,12 @@ import {
   ArrowRight,
   TrendingDown,
   ShoppingBag,
+  ShieldCheck,
+  Check,
 } from "lucide-react";
 
 export default function SuppliersPage() {
-  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [suppliers, setSuppliers] = useState<EnrichedSupplier[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Create / Edit Modal State
@@ -167,8 +169,9 @@ export default function SuppliersPage() {
 
   // Metrics
   const totalPayables = suppliers.reduce((sum, s) => sum + Number(s.current_balance || 0), 0);
+  const totalPurchasesVolume = suppliers.reduce((sum, s) => sum + Number(s.total_purchased || 0), 0);
 
-  const columns: Column<Supplier>[] = [
+  const columns: Column<EnrichedSupplier>[] = [
     {
       header: "Distributor / Supplier",
       cell: (s) => (
@@ -186,33 +189,51 @@ export default function SuppliersPage() {
       ),
     },
     {
-      header: "Phone",
+      header: "Contact Info",
       cell: (s) => (
-        <span className="font-mono text-slate-700 text-xs font-semibold">
-          {s.phone || "—"}
-        </span>
+        <div className="space-y-0.5 text-xs">
+          <div className="font-mono text-slate-700 font-semibold">{s.phone || "—"}</div>
+          <div className="text-[11px] text-slate-500 font-mono truncate max-w-[160px]">{s.email || "—"}</div>
+        </div>
       ),
     },
     {
-      header: "Email",
-      cell: (s) => (
-        <span className="text-slate-600 text-xs font-mono">
-          {s.email || "—"}
-        </span>
-      ),
+      header: "Total Inward Purchases",
+      align: "right",
+      cell: (s) => {
+        const val = Number(s.total_purchased || 0);
+        return (
+          <span className="font-mono font-black text-xs text-purple-950">
+            Rs. {val.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </span>
+        );
+      },
     },
     {
-      header: "Outstanding Payable",
+      header: "Total Payouts Settled",
+      align: "right",
+      cell: (s) => {
+        const val = Number(s.total_paid || 0);
+        return (
+          <span className="font-mono font-bold text-xs text-emerald-800">
+            Rs. {val.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </span>
+        );
+      },
+    },
+    {
+      header: "Outstanding Due Balance",
       align: "right",
       cell: (s) => {
         const bal = Number(s.current_balance || 0);
-        return (
-          <span
-            className={`font-mono font-black text-xs ${
-              bal > 0 ? "text-amber-950" : "text-emerald-800"
-            }`}
-          >
-            Rs. {bal.toFixed(2)}
+        return bal > 0 ? (
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-black bg-amber-50 text-amber-950 border border-amber-200 font-mono">
+            Rs. {bal.toFixed(2)} DUE
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200">
+            <Check className="w-3 h-3 text-emerald-600" />
+            <span>CLEARED</span>
           </span>
         );
       },
@@ -224,8 +245,8 @@ export default function SuppliersPage() {
         <div className="flex items-center justify-end gap-1">
           <button
             onClick={() => openDetailsModal(s)}
-            className="px-2 py-1 text-xs font-bold text-purple-700 hover:text-purple-950 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
-            title="View Purchased Invoices & Accounts"
+            className="px-2.5 py-1 text-xs font-bold text-purple-700 hover:text-purple-950 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+            title="View Invoices & Payout Details"
           >
             <Eye className="w-3.5 h-3.5" />
             <span>Details</span>
@@ -241,6 +262,10 @@ export default function SuppliersPage() {
       ),
     },
   ];
+
+  // Calculate detailed summary metrics for modal
+  const selectedTotalPurchased = supplierPurchases.reduce((sum, p) => sum + Number(p.total || 0), 0);
+  const selectedTotalPaid = supplierPayments.reduce((sum, pm) => sum + Number(pm.amount || 0), 0);
 
   return (
     <div className="space-y-6">
@@ -266,7 +291,7 @@ export default function SuppliersPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-white shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Registered Distributors</span>
           <p className="text-2xl font-black text-amber-950 font-mono">{suppliers.length} vendors</p>
@@ -274,11 +299,19 @@ export default function SuppliersPage() {
         </div>
 
         <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Accounts Payable</span>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Purchased Volume</span>
           <p className="text-2xl font-black text-purple-950 font-mono">
+            Rs. {totalPurchasesVolume.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </p>
+          <span className="text-[10px] text-purple-800 font-bold">Total inward wholesale volume</span>
+        </div>
+
+        <div className="solvexa-card p-4 space-y-1 border-rose-100 bg-white shadow-xs">
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Accounts Payable Due</span>
+          <p className="text-2xl font-black text-rose-800 font-mono">
             Rs. {totalPayables.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>
-          <span className="text-[10px] text-purple-800 font-bold">Unsettled vendor debt balance</span>
+          <span className="text-[10px] text-rose-700 font-bold">Unsettled vendor balance</span>
         </div>
       </div>
 
@@ -443,18 +476,33 @@ export default function SuppliersPage() {
               {/* Summary Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="p-3.5 rounded-xl bg-purple-50 border border-purple-100 space-y-1">
-                  <span className="text-[10px] font-extrabold uppercase text-purple-900">Total Purchase Orders</span>
-                  <p className="text-xl font-black text-purple-950 font-mono">{supplierPurchases.length} invoices</p>
+                  <span className="text-[10px] font-extrabold uppercase text-purple-900">Total Purchased Volume</span>
+                  <p className="text-xl font-black text-purple-950 font-mono">
+                    Rs. {selectedTotalPurchased.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </p>
+                  <span className="text-[10px] text-slate-500 font-mono">{supplierPurchases.length} inward order(s)</span>
                 </div>
+
+                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100 space-y-1">
+                  <span className="text-[10px] font-extrabold uppercase text-emerald-900">Total Payments Settled</span>
+                  <p className="text-xl font-black text-emerald-950 font-mono">
+                    Rs. {selectedTotalPaid.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </p>
+                  <span className="text-[10px] text-emerald-800 font-bold">{supplierPayments.length} payout(s)</span>
+                </div>
+
                 <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100 space-y-1">
                   <span className="text-[10px] font-extrabold uppercase text-amber-900">Outstanding Vendor Balance</span>
                   <p className="text-xl font-black text-amber-950 font-mono">
                     Rs. {Number(selectedSupplier.current_balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </p>
-                </div>
-                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100 space-y-1">
-                  <span className="text-[10px] font-extrabold uppercase text-emerald-900">Payments Settled</span>
-                  <p className="text-xl font-black text-emerald-950 font-mono">{supplierPayments.length} payouts</p>
+                  {Number(selectedSupplier.current_balance || 0) === 0 ? (
+                    <span className="text-[10px] text-emerald-800 font-black inline-flex items-center gap-1">
+                      <Check className="w-3 h-3 text-emerald-600" /> FULLY SETTLED
+                    </span>
+                  ) : (
+                    <span className="text-[10px] text-amber-800 font-bold">Unsettled vendor debt</span>
+                  )}
                 </div>
               </div>
 

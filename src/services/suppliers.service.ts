@@ -1,16 +1,36 @@
 import { createClient } from "@/lib/supabase/client";
 import { Supplier, Purchase, Payment } from "@/types/database.types";
 
+export interface EnrichedSupplier extends Supplier {
+  total_purchased?: number;
+  total_paid?: number;
+}
+
 export const suppliersService = {
   async getSuppliers() {
     const supabase = createClient();
     const { data, error } = await supabase
       .from("suppliers")
-      .select("*")
+      .select("*, purchases(total, paid_amount, due_amount), payments(amount)")
       .order("name", { ascending: true });
 
     if (error) throw error;
-    return (data || []) as Supplier[];
+
+    return (data || []).map((s: any) => {
+      const total_purchased = (s.purchases || []).reduce(
+        (sum: number, p: any) => sum + Number(p.total || 0),
+        0
+      );
+      const total_paid = (s.payments || []).reduce(
+        (sum: number, pm: any) => sum + Number(pm.amount || 0),
+        0
+      );
+      return {
+        ...s,
+        total_purchased,
+        total_paid,
+      };
+    }) as EnrichedSupplier[];
   },
 
   async createSupplier(supplier: Partial<Supplier>) {
