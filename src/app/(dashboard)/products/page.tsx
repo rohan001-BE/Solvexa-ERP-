@@ -30,8 +30,31 @@ import {
   ArrowRight,
   ChevronRight,
   SlidersHorizontal,
+  Image as ImageIcon,
+  Globe,
+  Wand2,
 } from "lucide-react";
+import Image from "next/image";
 import { ProtectedRoute } from "@/components/layout/protected-route";
+
+const GROCERY_IMAGE_PRESETS = [
+  { name: "Dairy Milk", url: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&auto=format&fit=crop&q=80" },
+  { name: "Farm Eggs", url: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&auto=format&fit=crop&q=80" },
+  { name: "Red Apples", url: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=600&auto=format&fit=crop&q=80" },
+  { name: "Fresh Bananas", url: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&auto=format&fit=crop&q=80" },
+  { name: "Wheat Bread", url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80" },
+  { name: "Basmati Rice", url: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&auto=format&fit=crop&q=80" },
+  { name: "Cooking Oil", url: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&auto=format&fit=crop&q=80" },
+  { name: "Vegetables", url: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&auto=format&fit=crop&q=80" },
+  { name: "Tomatoes", url: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&auto=format&fit=crop&q=80" },
+  { name: "Chai Tea", url: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80" },
+  { name: "Coffee", url: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&auto=format&fit=crop&q=80" },
+  { name: "Fruit Juice", url: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&auto=format&fit=crop&q=80" },
+  { name: "Potato Chips", url: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=600&auto=format&fit=crop&q=80" },
+  { name: "Detergent", url: "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=600&auto=format&fit=crop&q=80" },
+  { name: "Butter & Cheese", url: "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=600&auto=format&fit=crop&q=80" },
+  { name: "Chicken & Meat", url: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=600&auto=format&fit=crop&q=80" },
+];
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -59,6 +82,7 @@ export default function ProductsPage() {
   const [salePrice, setSalePrice] = useState<number>(0);
   const [minStock, setMinStock] = useState<number>(5);
   const [initialStock, setInitialStock] = useState<number>(0);
+  const [imageUrl, setImageUrl] = useState("");
   const [isActive, setIsActive] = useState(true);
 
   const loadData = async () => {
@@ -95,6 +119,7 @@ export default function ProductsPage() {
     setSalePrice(0);
     setMinStock(5);
     setInitialStock(0);
+    setImageUrl("");
     setIsActive(true);
     setIsModalOpen(true);
   };
@@ -110,6 +135,7 @@ export default function ProductsPage() {
     setPurchasePrice(Number(p.purchase_price ?? p.cost_price ?? 0));
     setSalePrice(Number(p.sale_price ?? 0));
     setMinStock(Number(p.minimum_stock ?? p.min_stock_level ?? 5));
+    setImageUrl(p.image_url || "");
     setIsActive(p.is_active);
     setIsModalOpen(true);
   };
@@ -131,6 +157,7 @@ export default function ProductsPage() {
           purchase_price: purchasePrice,
           sale_price: salePrice,
           minimum_stock: minStock,
+          image_url: imageUrl.trim() || null,
           is_active: isActive,
         });
       } else {
@@ -145,6 +172,7 @@ export default function ProductsPage() {
             purchase_price: purchasePrice,
             sale_price: salePrice,
             minimum_stock: minStock,
+            image_url: imageUrl.trim() || null,
             is_active: isActive,
           },
           initialStock
@@ -283,8 +311,12 @@ export default function ProductsPage() {
       header: "Product & SKU Code",
       cell: (p) => (
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-100 to-amber-100 text-purple-900 flex items-center justify-center font-bold flex-shrink-0 border border-purple-200 shadow-xs">
-            <Package className="w-5 h-5 text-purple-800" />
+          <div className="w-10 h-10 rounded-xl bg-slate-100 overflow-hidden text-purple-900 flex items-center justify-center font-bold flex-shrink-0 border border-purple-200 shadow-2xs relative">
+            {p.image_url ? (
+              <Image src={p.image_url} alt={p.name} fill className="object-cover" />
+            ) : (
+              <Package className="w-5 h-5 text-purple-800" />
+            )}
           </div>
           <div>
             <div className="font-black text-slate-900 text-xs">{p.name}</div>
@@ -837,6 +869,66 @@ export default function ProductsPage() {
                     />
                   </div>
                 )}
+              </div>
+
+              {/* Product Image URL & Internet Presets */}
+              <div className="space-y-2 pt-2 border-t border-slate-100">
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <ImageIcon className="w-4 h-4 text-purple-700" />
+                    <span>Product Image (Internet URL)</span>
+                  </label>
+                  {imageUrl && (
+                    <button
+                      type="button"
+                      onClick={() => setImageUrl("")}
+                      className="text-[10px] text-rose-600 hover:underline font-bold"
+                    >
+                      Remove Photo
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex gap-3 items-center">
+                  <div className="relative w-14 h-14 rounded-2xl bg-slate-100 border-2 border-dashed border-purple-200 flex-shrink-0 overflow-hidden flex items-center justify-center">
+                    {imageUrl ? (
+                      <Image src={imageUrl} alt="Product Preview" fill className="object-cover" />
+                    ) : (
+                      <ImageIcon className="w-6 h-6 text-slate-300" />
+                    )}
+                  </div>
+                  <input
+                    type="url"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Paste image link (e.g. https://images.unsplash.com/...)"
+                    className="flex-1 bg-white border border-slate-200 focus:border-purple-600 text-slate-900 rounded-xl px-3.5 py-2.5 outline-none font-mono text-xs"
+                  />
+                </div>
+
+                {/* Popular Internet Presets for Grocery */}
+                <div className="space-y-1 pt-1">
+                  <span className="text-[10px] font-bold text-purple-900 uppercase tracking-wider flex items-center gap-1">
+                    <Wand2 className="w-3 h-3 text-amber-500" />
+                    Quick Internet Grocery Photo Presets
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto p-1 bg-slate-50 rounded-xl border border-slate-100 scrollbar-thin">
+                    {GROCERY_IMAGE_PRESETS.map((preset) => (
+                      <button
+                        key={preset.name}
+                        type="button"
+                        onClick={() => setImageUrl(preset.url)}
+                        className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
+                          imageUrl === preset.url
+                            ? "bg-purple-900 text-amber-300 shadow-xs"
+                            : "bg-white border border-slate-200 text-slate-700 hover:bg-purple-50 hover:text-purple-900"
+                        }`}
+                      >
+                        {preset.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
