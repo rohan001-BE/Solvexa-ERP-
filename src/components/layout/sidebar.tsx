@@ -73,6 +73,7 @@ const navSections = [
     title: "Administration",
     items: [
       { name: "Employees & Staff", href: "/employees", icon: UserCheck, permission: "view_employees" },
+      { name: "Content Management (CMS)", href: "/cms", icon: LayoutTemplate, permission: "manage_settings" },
       { name: "Audit Logs", href: "/audit-logs", icon: ClipboardList, permission: "view_audit_logs" },
       { name: "Store Settings", href: "/settings", icon: Settings, permission: "manage_settings" },
     ],
@@ -80,7 +81,6 @@ const navSections = [
   {
     title: "Store Info",
     items: [
-      { name: "Content Management (CMS)", href: "/cms", icon: LayoutTemplate, permission: "manage_settings" },
       { name: "About Solvexa", href: "/about", icon: Info, permission: "view_dashboard" },
     ],
   },

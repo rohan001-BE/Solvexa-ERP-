@@ -207,8 +207,9 @@ const PERMISSION_GROUPS: PermissionGroup[] = [
       },
       {
         code: "create_sales",
-        label: "Create Sales Invoices",
-        description: "Generate checkout invoices and deduct items from store stock",
+        label: "Point of Sale (POS) & Invoice Generation",
+        isPage: true,
+        description: "Access /pos and /sales to quickly scan items, take payments, and generate customer receipts",
       },
       {
         code: "edit_sales",
@@ -280,9 +281,9 @@ const PERMISSION_GROUPS: PermissionGroup[] = [
       },
       {
         code: "manage_settings",
-        label: "Store Settings Page",
+        label: "Store Settings & Content Management (CMS)",
         isPage: true,
-        description: "Access /settings to configure store name, receipt headers, and defaults",
+        description: "Access /settings and /cms to configure store metadata, receipt headers, and public website content",
       },
     ],
   },
