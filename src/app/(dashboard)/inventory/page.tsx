@@ -24,6 +24,8 @@ import {
   Layers,
   Tag,
   DollarSign,
+  BarChart3,
+  PieChart,
 } from "lucide-react";
 
 export default function InventoryPage() {
@@ -384,21 +386,21 @@ export default function InventoryPage() {
 
       {/* Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Stock on Hand</span>
+        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-gradient-to-br from-white via-purple-50/20 to-purple-50/50 shadow-xs">
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Total Stock Units</span>
           <p className="text-2xl font-black text-purple-950 font-mono">{totalStockUnits.toLocaleString()} units</p>
           <span className="text-[10px] text-slate-500 font-mono">Across all grocery SKUs</span>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-white shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Wholesale Stock Valuation</span>
+        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-gradient-to-br from-white via-amber-50/20 to-amber-50/50 shadow-xs">
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Wholesale Valuation</span>
           <p className="text-2xl font-black text-amber-950 font-mono">
             Rs. {totalStockValuation.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>
-          <span className="text-[10px] text-slate-500">Wholesale cost on shelf</span>
+          <span className="text-[10px] text-slate-500 font-mono">Cost basis on shelves</span>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-white shadow-xs">
+        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-gradient-to-br from-white via-emerald-50/20 to-emerald-50/50 shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Retail Realizable Value</span>
           <p className="text-2xl font-black text-emerald-900 font-mono">
             Rs. {totalRetailValuation.toLocaleString(undefined, { minimumFractionDigits: 2 })}
@@ -406,7 +408,7 @@ export default function InventoryPage() {
           <span className="text-[10px] text-emerald-800 font-bold">Estimated sales turnover</span>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-rose-100 bg-white shadow-xs">
+        <div className="solvexa-card p-4 space-y-1 border-rose-100 bg-gradient-to-br from-white via-rose-50/20 to-rose-50/50 shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Stock Alerts</span>
           <div className="flex items-center gap-2">
             <p className="text-2xl font-black text-rose-800 font-mono">{lowStockCount + outOfStockCount}</p>
@@ -418,58 +420,125 @@ export default function InventoryPage() {
         </div>
       </div>
 
-      {/* Tabs Filter Bar */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-2 text-xs">
-        <button
-          onClick={() => setActiveTab("all")}
-          className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "all"
-              ? "bg-purple-900 text-amber-300 shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          All SKUs ({inventory.length})
-        </button>
-        <button
-          onClick={() => setActiveTab("healthy")}
-          className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "healthy"
-              ? "bg-emerald-800 text-white shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Healthy Stock ({healthyStockCount})
-        </button>
-        <button
-          onClick={() => setActiveTab("low")}
-          className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "low"
-              ? "bg-amber-700 text-white shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Low Stock Alerts ({lowStockCount})
-        </button>
-        <button
-          onClick={() => setActiveTab("out")}
-          className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "out"
-              ? "bg-rose-700 text-white shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Out of Stock ({outOfStockCount})
-        </button>
-        <button
-          onClick={() => setActiveTab("movements")}
-          className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "movements"
-              ? "bg-slate-800 text-white shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Movement Audit Logs ({movements.length})
-        </button>
+      {/* Stock Health Composition & Summary Bars */}
+      <div className="solvexa-card p-5 border border-purple-100 bg-white shadow-xs space-y-3">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <div className="flex items-center gap-2">
+            <BarChart3 className="w-4 h-4 text-purple-700" />
+            <h3 className="text-xs font-black text-purple-950 uppercase tracking-wider">
+              Live Stock Health Composition Breakdown
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-slate-400 font-bold">
+            {inventory.length} Stock Tracked SKUs
+          </span>
+        </div>
+
+        <div className="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex p-0.5 gap-0.5 border border-slate-200">
+          <div
+            style={{ width: `${inventory.length > 0 ? (healthyStockCount / inventory.length) * 100 : 0}%` }}
+            className="h-full bg-emerald-600 rounded-l-full"
+          />
+          <div
+            style={{ width: `${inventory.length > 0 ? (lowStockCount / inventory.length) * 100 : 0}%` }}
+            className="h-full bg-amber-500"
+          />
+          <div
+            style={{ width: `${inventory.length > 0 ? (outOfStockCount / inventory.length) * 100 : 0}%` }}
+            className="h-full bg-rose-600 rounded-r-full"
+          />
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 pt-1 text-xs">
+          <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+            <span className="font-bold text-emerald-950 flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" /> Healthy
+            </span>
+            <span className="font-mono font-black text-emerald-900">{healthyStockCount} SKUs</span>
+          </div>
+
+          <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between">
+            <span className="font-bold text-amber-950 flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Low Stock
+            </span>
+            <span className="font-mono font-black text-amber-900">{lowStockCount} SKUs</span>
+          </div>
+
+          <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-between">
+            <span className="font-bold text-rose-950 flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-600" /> Out of Stock
+            </span>
+            <span className="font-mono font-black text-rose-900">{outOfStockCount} SKUs</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs Filter Bar with Divider */}
+      <div className="space-y-3">
+        <div className="border-t-2 border-purple-200/60 pt-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-purple-700" />
+            <span className="text-xs font-black uppercase tracking-wider text-purple-950">
+              Live Stock Inventory Records
+            </span>
+          </div>
+          <span className="text-[11px] text-slate-500 font-mono">
+            Showing {filteredInventory.length} Items
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-2 text-xs">
+          <button
+            onClick={() => setActiveTab("all")}
+            className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "all"
+                ? "bg-purple-900 text-amber-300 shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            All SKUs ({inventory.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("healthy")}
+            className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "healthy"
+                ? "bg-emerald-800 text-white shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Healthy Stock ({healthyStockCount})
+          </button>
+          <button
+            onClick={() => setActiveTab("low")}
+            className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "low"
+                ? "bg-amber-700 text-white shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Low Stock Alerts ({lowStockCount})
+          </button>
+          <button
+            onClick={() => setActiveTab("out")}
+            className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "out"
+                ? "bg-rose-700 text-white shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Out of Stock ({outOfStockCount})
+          </button>
+          <button
+            onClick={() => setActiveTab("movements")}
+            className={`px-3.5 py-1.5 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "movements"
+                ? "bg-slate-800 text-white shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Movement Audit Logs ({movements.length})
+          </button>
+        </div>
       </div>
 
       {/* Content */}

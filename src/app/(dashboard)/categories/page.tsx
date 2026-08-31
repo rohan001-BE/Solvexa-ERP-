@@ -19,6 +19,8 @@ import {
   Package,
   Building,
   Tag,
+  BarChart3,
+  PieChart,
 } from "lucide-react";
 
 export default function CategoriesPage() {
@@ -120,12 +122,14 @@ export default function CategoriesPage() {
     }
   };
 
+  const maxProductsInCat = Math.max(...categories.map((c) => products.filter((p) => p.category_id === c.id).length), 1);
+
   const catColumns: Column<Category>[] = [
     {
       header: "Department / Category",
       cell: (c) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-100 to-amber-100 text-purple-950 flex items-center justify-center font-black text-xs border border-purple-200 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-100 to-amber-100 text-purple-950 flex items-center justify-center font-black text-xs border border-purple-200 shadow-xs">
             <Tag className="w-4 h-4 text-purple-800" />
           </div>
           <div>
@@ -178,7 +182,7 @@ export default function CategoriesPage() {
       header: "Unit Name",
       cell: (u) => (
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xs border border-amber-200">
+          <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xs border border-amber-200 shadow-xs">
             <Ruler className="w-4 h-4 text-amber-800" />
           </div>
           <span className="font-extrabold text-slate-900 text-xs">{u.name}</span>
@@ -252,47 +256,98 @@ export default function CategoriesPage() {
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-white shadow-xs">
+        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-gradient-to-br from-white via-purple-50/20 to-purple-50/50 shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Categories &amp; Aisles</span>
           <p className="text-2xl font-black text-purple-950 font-mono">{categories.length}</p>
           <span className="text-[10px] text-purple-800 font-bold">Active grocery departments</span>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-white shadow-xs">
+        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-gradient-to-br from-white via-amber-50/20 to-amber-50/50 shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Measurement Units</span>
           <p className="text-2xl font-black text-amber-950 font-mono">{units.length}</p>
           <span className="text-[10px] text-slate-500 font-mono">Weight / count standards</span>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-white shadow-xs">
+        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-gradient-to-br from-white via-emerald-50/20 to-emerald-50/50 shadow-xs">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Catalog SKUs Classified</span>
           <p className="text-2xl font-black text-emerald-900 font-mono">{products.length}</p>
           <span className="text-[10px] text-emerald-800 font-bold">Items mapped to departments</span>
         </div>
       </div>
 
-      {/* Tabs Switcher */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs">
-        <button
-          onClick={() => setActiveTab("categories")}
-          className={`px-4 py-2 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "categories"
-              ? "bg-purple-900 text-amber-300 shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Department Categories ({categories.length})
-        </button>
-        <button
-          onClick={() => setActiveTab("units")}
-          className={`px-4 py-2 font-bold rounded-xl transition-all cursor-pointer ${
-            activeTab === "units"
-              ? "bg-amber-700 text-white shadow-xs"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
-        >
-          Measurement Units ({units.length})
-        </button>
+      {/* Department Coverage Visual Distribution Card */}
+      <div className="solvexa-card p-5 border border-purple-100 bg-white shadow-xs space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <div className="flex items-center gap-2">
+            <BarChart3 className="w-4 h-4 text-purple-700" />
+            <h3 className="text-xs font-black text-purple-950 uppercase tracking-wider">
+              Department Coverage &amp; Product Share
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-slate-400 font-bold">
+            Total {products.length} Products Assigned
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {categories.map((c) => {
+            const count = products.filter((p) => p.category_id === c.id).length;
+            const pct = products.length > 0 ? ((count / products.length) * 100).toFixed(0) : "0";
+            return (
+              <div key={c.id} className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-purple-300 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-xs truncate">{c.name}</span>
+                  <span className="font-mono font-black text-purple-950 text-xs">{count} SKUs</span>
+                </div>
+                <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    style={{ width: `${Math.max(10, (count / maxProductsInCat) * 100)}%` }}
+                    className="h-full bg-gradient-to-r from-purple-700 to-amber-600 rounded-full"
+                  />
+                </div>
+                <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+                  <span>Share: {pct}% of catalog</span>
+                  <span className="text-emerald-700 font-bold">{c.is_active ? "Active" : "Inactive"}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Tabs Switcher with Divider */}
+      <div className="space-y-3">
+        <div className="border-t-2 border-purple-200/60 pt-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-purple-700" />
+            <span className="text-xs font-black uppercase tracking-wider text-purple-950">
+              Taxonomy Tables
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs">
+          <button
+            onClick={() => setActiveTab("categories")}
+            className={`px-4 py-2 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "categories"
+                ? "bg-purple-900 text-amber-300 shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Department Categories ({categories.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("units")}
+            className={`px-4 py-2 font-bold rounded-xl transition-all cursor-pointer ${
+              activeTab === "units"
+                ? "bg-amber-700 text-white shadow-xs"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            Measurement Units ({units.length})
+          </button>
+        </div>
       </div>
 
       {activeTab === "categories" ? (
