@@ -255,23 +255,56 @@ export default function CategoriesPage() {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="solvexa-card p-4 space-y-1 border-purple-100 bg-gradient-to-br from-white via-purple-50/20 to-purple-50/50 shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Categories &amp; Aisles</span>
-          <p className="text-2xl font-black text-purple-950 font-mono">{categories.length}</p>
-          <span className="text-[10px] text-purple-800 font-bold">Active grocery departments</span>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 shadow-xl shadow-purple-900/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-purple-200/80">Departments</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">{categories.length}</p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+              <Tags className="w-5 h-5 text-purple-200" />
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-purple-200/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <Sparkles className="w-3 h-3 text-purple-300" />
+            <span>Active grocery aisles</span>
+          </div>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-amber-100 bg-gradient-to-br from-white via-amber-50/20 to-amber-50/50 shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Measurement Units</span>
-          <p className="text-2xl font-black text-amber-950 font-mono">{units.length}</p>
-          <span className="text-[10px] text-slate-500 font-mono">Weight / count standards</span>
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-amber-600 via-orange-500 to-rose-500 shadow-xl shadow-amber-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-amber-100/80">Measurements</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">{units.length}</p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+              <Ruler className="w-5 h-5 text-amber-100" />
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-amber-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <CheckCircle2 className="w-3 h-3 text-amber-200" />
+            <span>Standardized units</span>
+          </div>
         </div>
 
-        <div className="solvexa-card p-4 space-y-1 border-emerald-100 bg-gradient-to-br from-white via-emerald-50/20 to-emerald-50/50 shadow-xs">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Catalog SKUs Classified</span>
-          <p className="text-2xl font-black text-emerald-900 font-mono">{products.length}</p>
-          <span className="text-[10px] text-emerald-800 font-bold">Items mapped to departments</span>
+        <div className="solvexa-card p-5 border-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 shadow-xl shadow-emerald-600/20 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500" />
+          <div className="relative z-10 flex items-start justify-between">
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-widest text-emerald-100/80">Total SKUs</span>
+              <p className="text-3xl font-black text-white font-mono tracking-tight">{products.length}</p>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+              <Package className="w-5 h-5 text-emerald-100" />
+            </div>
+          </div>
+          <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-emerald-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
+            <Layers className="w-3 h-3 text-emerald-200" />
+            <span>Classified items</span>
+          </div>
         </div>
       </div>
 
