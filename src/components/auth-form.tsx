@@ -54,7 +54,7 @@ export function AuthForm({ initialMode = "login" }: AuthFormProps) {
         {/* Emblem & Title */}
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="relative w-16 h-16 rounded-3xl overflow-hidden bg-white/10 backdrop-blur-md p-2 border border-purple-200/20 shadow-inner flex items-center justify-center">
-            <Image src="/solxa-no-bg.png?v=2" alt="Solxa Logo" width={56} height={56} className="object-contain" priority />
+            <Image src="/solxa-no-bg.png" alt="Solxa Logo" width={56} height={56} className="object-contain" priority />
           </div>
           <div>
             <h2 className="text-xl font-black text-purple-950 tracking-tight">

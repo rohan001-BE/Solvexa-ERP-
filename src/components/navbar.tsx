@@ -38,7 +38,7 @@ export function Navbar() {
         >
           <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1 flex-shrink-0">
             <Image
-              src="/solxa-no-bg.png?v=2"
+              src="/solxa-no-bg.png"
               alt="Solxa Logo"
               width={38}
               height={38}

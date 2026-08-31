@@ -14,7 +14,7 @@ export default function LoginPage() {
       <header className="relative z-10 max-w-6xl mx-auto w-full flex items-center justify-between py-2">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-amber-400/40 shadow-lg flex items-center justify-center">
-            <Image src="/solxa-no-bg.png?v=2" alt="Solxa Logo" width={34} height={34} className="object-contain" priority />
+            <Image src="/solxa-no-bg.png" alt="Solxa Logo" width={34} height={34} className="object-contain" priority />
           </div>
           <div>
             <span className="font-black text-sm tracking-tight text-white flex items-center gap-1">

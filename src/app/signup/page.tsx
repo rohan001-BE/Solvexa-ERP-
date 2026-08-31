@@ -11,7 +11,7 @@ export default function SignupPage() {
         <div className="flex flex-col items-center gap-2">
           <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-lg flex items-center justify-center p-1 group hover:scale-105 transition-transform">
             <Image
-              src="/solxa-no-bg.png?v=2"
+              src="/solxa-no-bg.png"
               alt="Solxa Logo"
               width={60}
               height={60}

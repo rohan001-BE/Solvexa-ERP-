@@ -70,7 +70,7 @@ export default async function HomePage() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-12 h-12 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform">
               <Image
-                src="/solxa-no-bg.png?v=2"
+                src="/solxa-no-bg.png"
                 alt="Solxa Logo"
                 width={44}
                 height={44}
