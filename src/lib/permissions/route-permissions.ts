@@ -13,12 +13,14 @@ export const ROUTE_PERMISSIONS: Record<string, string> = {
   "/customers": "view_customers",
   "/sales": "view_sales",
   "/sales-returns": "return_sales",
+  "/pos": "create_sales",
   "/payments": "view_payments",
   "/expenses": "view_expenses",
   "/reports": "view_reports",
   "/employees": "view_employees",
   "/audit-logs": "view_audit_logs",
   "/settings": "manage_settings",
+  "/cms": "manage_settings",
   "/about": "view_dashboard",
 };
 
@@ -56,6 +58,7 @@ export function getDefaultRoute(permissions: string[], isAdmin: boolean): string
     "/dashboard",
     "/products",
     "/sales",
+    "/pos",
     "/inventory",
     "/reports",
     "/payments",

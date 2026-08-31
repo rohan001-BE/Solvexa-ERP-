@@ -20,6 +20,8 @@ import {
   Settings,
   Tags,
   FileSpreadsheet,
+  MonitorSmartphone,
+  LayoutTemplate,
   ChevronRight,
   LogOut,
   Info,
@@ -53,6 +55,7 @@ const navSections = [
   {
     title: "Sales & Invoicing",
     items: [
+      { name: "Point of Sale (POS)", href: "/pos", icon: MonitorSmartphone, permission: "create_sales" },
       { name: "Customers", href: "/customers", icon: Users, permission: "view_customers" },
       { name: "Sales Invoices", href: "/sales", icon: FileSpreadsheet, permission: "view_sales" },
       { name: "Sales Returns", href: "/sales-returns", icon: RotateCcw, permission: "return_sales" },
@@ -77,6 +80,7 @@ const navSections = [
   {
     title: "Store Info",
     items: [
+      { name: "Content Management (CMS)", href: "/cms", icon: LayoutTemplate, permission: "manage_settings" },
       { name: "About Solvexa", href: "/about", icon: Info, permission: "view_dashboard" },
     ],
   },

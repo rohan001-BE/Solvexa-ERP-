@@ -1,38 +1,66 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  Award,
   Sparkles,
-  ShoppingBag,
-  TrendingUp,
-  Boxes,
-  Users,
+  Award,
+  Store,
   CheckCircle2,
   ArrowRight,
-  Store,
+  Loader2
 } from "lucide-react";
 import { ProtectedRoute } from "@/components/layout/protected-route";
+import { getCMSContent, CMSContent } from "@/app/actions/cms";
 
 export default function AboutPage() {
+  const [heroContent, setHeroContent] = useState<CMSContent | null>(null);
+  const [aboutContent, setAboutContent] = useState<CMSContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchContent() {
+      try {
+        const [hero, about] = await Promise.all([
+          getCMSContent("hero"),
+          getCMSContent("about")
+        ]);
+        setHeroContent(hero);
+        setAboutContent(about);
+      } catch (err) {
+        console.error("Failed to load CMS content", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchContent();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-[50vh]">
+        <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+      </div>
+    );
+  }
+
   return (
     <ProtectedRoute permission="view_dashboard">
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
       {/* Header Banner */}
-      <div className="relative overflow-hidden solvexa-banner-dark p-8 sm:p-12 text-white">
+      <div className="relative overflow-hidden solvexa-banner-dark p-8 sm:p-12 text-white rounded-3xl shadow-lg border border-purple-900/50">
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 justify-between">
           <div className="space-y-4 max-w-xl text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-400/20 text-amber-300 border border-amber-300/40">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Solvexa Grocery Store Enterprise Architecture</span>
+              <span>{heroContent?.subtitle || "Solvexa Grocery Store Enterprise Architecture"}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
-              Premium Retail &amp; Grocery Operations Engine
+              {heroContent?.title || "Premium Retail & Grocery Operations Engine"}
             </h1>
-            <p className="text-sm text-purple-100 leading-relaxed font-normal">
-              Designed with royal purple and gold aesthetics, Solvexa Grocery ERP is built for high-throughput inventory management, atomic double-entry ledger bookkeeping, supplier logistics, and customer credit billing.
+            <p className="text-sm text-purple-100 leading-relaxed font-normal whitespace-pre-wrap">
+              {heroContent?.content_body || "Designed with royal purple and gold aesthetics, Solvexa Grocery ERP is built for high-throughput inventory management, atomic double-entry ledger bookkeeping, supplier logistics, and customer credit billing."}
             </p>
           </div>
 
@@ -53,6 +81,19 @@ export default function AboutPage() {
         {/* Ambient Glow Elements */}
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl pointer-events-none" />
+      </div>
+
+      {/* Dynamic About Section */}
+      <div className="solvexa-card p-8 bg-white border-slate-200">
+        <h2 className="text-2xl font-black text-slate-900 mb-2">
+          {aboutContent?.title || "About Solvexa"}
+        </h2>
+        <h3 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-6">
+          {aboutContent?.subtitle || "Quality You Can Trust"}
+        </h3>
+        <div className="text-sm text-slate-700 leading-loose whitespace-pre-wrap">
+          {aboutContent?.content_body || "Solvexa Grocery ERP is your one-stop solution for managing daily inventory, POS, and sales with ease and precision."}
+        </div>
       </div>
 
       {/* Brand Identity & Color Philosophy */}
