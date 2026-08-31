@@ -22,6 +22,8 @@ import {
   Star
 } from "lucide-react";
 
+import { getUnsplashGroceryImage } from "@/lib/unsplash-images";
+
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
@@ -43,7 +45,10 @@ export default async function HomePage() {
     .order("created_at", { ascending: false })
     .limit(8);
 
-  const products = productsData || [];
+  const products = (productsData || []).map((p: any) => ({
+    ...p,
+    image_url: p.image_url || getUnsplashGroceryImage(p.name, p.category?.name),
+  }));
 
   // Categorize CMS posts
   const heroPost = cmsPosts.find((p) => p.section_key === "hero") || {

@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/client";
 import { Product, Category, Unit } from "@/types/database.types";
+import { getUnsplashGroceryImage } from "@/lib/unsplash-images";
 
 export const productsService = {
   async getProducts() {
@@ -10,7 +11,12 @@ export const productsService = {
       .order("name", { ascending: true });
 
     if (error) throw error;
-    return (data || []) as Product[];
+
+    const list = (data || []) as Product[];
+    return list.map((p) => ({
+      ...p,
+      image_url: p.image_url || getUnsplashGroceryImage(p.name, p.category?.name),
+    }));
   },
 
   async getCategories() {
