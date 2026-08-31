@@ -12,8 +12,8 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false);
 
   const [formData, setFormData] = useState({
-    store_name: "Solvexa Grocery Store",
-    store_address: "Solvexa Main Market, Pakistan",
+    store_name: "Solxa Grocery Store",
+    store_address: "Solxa Main Market, Pakistan",
     store_phone: "+92 300 1234567",
     currency: "PKR",
     default_tax_rate: 0,
@@ -26,7 +26,7 @@ export default function SettingsPage() {
       const data = await settingsService.getSettings();
       if (data) {
         setFormData({
-          store_name: data.store_name || "Solvexa Grocery Store",
+          store_name: data.store_name || "Solxa Grocery Store",
           store_address: data.store_address || "",
           store_phone: data.store_phone || "",
           currency: data.currency || "PKR",

@@ -53,12 +53,12 @@ export function AuthForm({ initialMode = "login" }: AuthFormProps) {
       <div className="solvexa-card p-6 sm:p-8 shadow-2xl border-2 border-amber-400/40 bg-white/95 backdrop-blur-xl rounded-3xl space-y-6 text-slate-900">
         {/* Emblem & Title */}
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-white p-1 border-2 border-amber-400 shadow-lg flex items-center justify-center group hover:scale-105 transition-transform">
-            <Image src="/logo.jpeg" alt="Solvexa Logo" width={56} height={56} className="object-contain" priority />
+          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-purple-950/5 p-1.5 border-2 border-amber-400 shadow-lg flex items-center justify-center group hover:scale-105 transition-transform">
+            <Image src="/solxa-no-bg.png" alt="Solxa Logo" width={56} height={56} className="object-contain" priority />
           </div>
           <div>
             <h2 className="text-xl font-black text-purple-950 tracking-tight">
-              {mode === "login" ? "Sign In to Solvexa ERP" : "Register Store Account"}
+              {mode === "login" ? "Sign In to Solxa ERP" : "Register Store Account"}
             </h2>
             <p className="text-xs text-slate-500 font-medium mt-0.5">
               {mode === "login"

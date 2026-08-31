@@ -13,15 +13,15 @@ export default function LoginPage() {
       {/* Top Header */}
       <header className="relative z-10 max-w-6xl mx-auto w-full flex items-center justify-between py-2">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-amber-400/40 shadow-lg flex items-center justify-center">
-            <Image src="/logo.png" alt="Solvexa Logo" width={30} height={30} className="object-contain" priority />
+          <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-amber-400/40 shadow-lg flex items-center justify-center">
+            <Image src="/solxa-no-bg.png" alt="Solxa Logo" width={34} height={34} className="object-contain" priority />
           </div>
           <div>
             <span className="font-black text-sm tracking-tight text-white flex items-center gap-1">
-              <span>Solvexa</span>
-              <span className="text-amber-400 font-black">Store</span>
+              <span>Solxa</span>
+              <span className="text-amber-400 font-black">Grocery</span>
             </span>
-            <span className="text-[10px] text-purple-200 font-mono block">Grocery ERP Enterprise v2.0</span>
+            <span className="text-[10px] text-purple-200 font-mono block">Store ERP Enterprise v2.0</span>
           </div>
         </div>
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-            Solvexa Retail &amp; Grocery <br />
+            Solxa Retail &amp; Grocery <br />
             <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200 bg-clip-text text-transparent drop-shadow-md">
               Operations Engine
             </span>
@@ -85,7 +85,7 @@ export default function LoginPage() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
           <span>PostgreSQL DB Engine: 100% Operational</span>
         </div>
-        <p>© {new Date().getFullYear()} Solvexa Store ERP. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Solxa Grocery Store ERP. All rights reserved.</p>
       </footer>
     </div>
   );

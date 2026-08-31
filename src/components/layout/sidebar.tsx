@@ -81,7 +81,7 @@ const navSections = [
   {
     title: "Store Info",
     items: [
-      { name: "About Solvexa", href: "/about", icon: Info, permission: "view_dashboard" },
+      { name: "About Solxa", href: "/about", icon: Info, permission: "view_dashboard" },
     ],
   },
 ];
@@ -119,26 +119,26 @@ export function Sidebar({
       {/* Brand Header with Clickable Logo Linking to Home */}
       <Link
         href="/"
-        title="Go to Solvexa Home Page"
+        title="Go to Solxa Home Page"
         className="h-16 px-4 flex items-center gap-3 border-b border-purple-100 bg-gradient-to-r from-purple-50/80 via-white to-amber-50/50 hover:bg-purple-50 transition-colors group cursor-pointer"
       >
-        <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center flex-shrink-0 p-0.5 group-hover:scale-105 transition-transform">
+        <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-2xs flex items-center justify-center flex-shrink-0 p-1 group-hover:scale-105 transition-transform">
           <Image
-            src="/logo.png"
-            alt="Solvexa Logo"
-            width={34}
-            height={34}
+            src="/solxa-no-bg.png"
+            alt="Solxa Logo"
+            width={38}
+            height={38}
             className="object-contain"
             priority
           />
         </div>
         <div className="flex flex-col min-w-0">
           <span className="font-black text-purple-950 tracking-tight text-sm truncate flex items-center gap-1 group-hover:text-purple-700 transition-colors">
-            <span>Solvexa</span>
-            <span className="text-amber-600 font-black">Store</span>
+            <span>Solxa</span>
+            <span className="text-amber-600 font-black">Grocery</span>
           </span>
           <span className="text-[10px] text-purple-700 font-bold tracking-wider uppercase font-mono">
-            Grocery ERP
+            Store ERP
           </span>
         </div>
       </Link>

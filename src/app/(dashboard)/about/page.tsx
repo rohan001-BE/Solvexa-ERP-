@@ -55,13 +55,13 @@ export default function AboutPage() {
           <div className="space-y-4 max-w-xl text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-400/20 text-amber-300 border border-amber-300/40">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>{heroContent?.subtitle || "Solvexa Grocery Store Enterprise Architecture"}</span>
+              <span>{heroContent?.subtitle || "Solxa Grocery Store Enterprise Architecture"}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
               {heroContent?.title || "Premium Retail & Grocery Operations Engine"}
             </h1>
             <p className="text-sm text-purple-100 leading-relaxed font-normal whitespace-pre-wrap">
-              {heroContent?.content_body || "Designed with royal purple and gold aesthetics, Solvexa Grocery ERP is built for high-throughput inventory management, atomic double-entry ledger bookkeeping, supplier logistics, and customer credit billing."}
+              {heroContent?.content_body || "Designed with royal purple and gold aesthetics, Solxa Grocery ERP is built for high-throughput inventory management, atomic double-entry ledger bookkeeping, supplier logistics, and customer credit billing."}
             </p>
           </div>
 
@@ -69,7 +69,7 @@ export default function AboutPage() {
             <div className="relative w-full h-full rounded-2xl overflow-hidden bg-white p-2 flex items-center justify-center shadow-inner">
               <Image
                 src="/logo.png"
-                alt="Solvexa Emblem"
+                alt="Solxa Emblem"
                 width={140}
                 height={140}
                 className="object-contain"
@@ -87,13 +87,13 @@ export default function AboutPage() {
       {/* Dynamic About Section */}
       <div className="solvexa-card p-8 bg-white border-slate-200">
         <h2 className="text-2xl font-black text-slate-900 mb-2">
-          {aboutContent?.title || "About Solvexa"}
+          {aboutContent?.title || "About Solxa"}
         </h2>
         <h3 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-6">
           {aboutContent?.subtitle || "Quality You Can Trust"}
         </h3>
         <div className="text-sm text-slate-700 leading-loose whitespace-pre-wrap">
-          {aboutContent?.content_body || "Solvexa Grocery ERP is your one-stop solution for managing daily inventory, POS, and sales with ease and precision."}
+          {aboutContent?.content_body || "Solxa Grocery ERP is your one-stop solution for managing daily inventory, POS, and sales with ease and precision."}
         </div>
       </div>
 
@@ -137,7 +137,7 @@ export default function AboutPage() {
             <Store className="w-5 h-5 text-purple-700" />
             <span>Core Architectural Standards</span>
           </h3>
-          <p className="text-xs text-slate-500">Implemented per the Solvexa Grocery ERP Specifications</p>
+          <p className="text-xs text-slate-500">Implemented per the Solxa Grocery ERP Specifications</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

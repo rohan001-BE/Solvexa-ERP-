@@ -68,23 +68,23 @@ export default async function HomePage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+            <div className="relative w-12 h-12 rounded-2xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-2xs flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform">
               <Image
-                src="/logo.png"
-                alt="Solvexa Logo"
-                width={40}
-                height={40}
+                src="/solxa-no-bg.png"
+                alt="Solxa Logo"
+                width={44}
+                height={44}
                 className="object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
               <span className="font-black text-purple-950 tracking-tight text-lg flex items-center gap-1">
-                <span>Solvexa</span>
-                <span className="text-amber-600 font-black">Store</span>
+                <span>Solxa</span>
+                <span className="text-amber-600 font-black">Grocery</span>
               </span>
               <span className="text-[10px] text-purple-700 font-bold tracking-widest uppercase font-mono">
-                Supermarket &amp; Grocery ERP
+                Store &amp; Supermarket ERP
               </span>
             </div>
           </Link>
@@ -487,7 +487,7 @@ export default async function HomePage() {
             <div className="lg:col-span-5 bg-white/5 rounded-3xl p-6 border border-white/10 space-y-4 text-xs">
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                <span>Solvexa Supermarket, Main Commercial Market, Pakistan</span>
+                <span>Solxa Supermarket, Main Commercial Market, Pakistan</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-amber-400 flex-shrink-0" />
@@ -495,7 +495,7 @@ export default async function HomePage() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                <span>support@solvexastore.com / billing@solvexastore.com</span>
+                <span>support@solxastore.com / billing@solxastore.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-amber-400 flex-shrink-0" />
@@ -510,7 +510,7 @@ export default async function HomePage() {
       <footer className="bg-slate-950 text-slate-400 py-8 border-t border-white/10 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-white">Solvexa Store ERP</span>
+            <span className="font-bold text-white">Solxa Grocery Store ERP</span>
             <span>• Enterprise Grocery &amp; POS Management Platform</span>
           </div>
           <div className="flex items-center gap-6">

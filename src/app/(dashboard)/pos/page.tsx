@@ -634,8 +634,8 @@ export default function POSPage() {
             {/* Printable Slip Preview */}
             <div className="p-6 overflow-y-auto space-y-4 text-slate-800 text-xs font-mono bg-white">
               <div className="text-center space-y-1 pb-3 border-b border-dashed border-slate-300">
-                <div className="font-black text-base text-purple-950 uppercase tracking-tight">Solvexa Grocery Store</div>
-                <div className="text-[10px] text-slate-500">Solvexa Main Market, Pakistan</div>
+                <div className="font-black text-base text-purple-950 uppercase tracking-tight">Solxa Grocery Store</div>
+                <div className="text-[10px] text-slate-500">Solxa Main Market, Pakistan</div>
                 <div className="text-[10px] text-slate-500">Tel: +92 300 1234567</div>
                 <div className="text-[10px] font-bold text-purple-900 mt-1">Invoice #: {completedSale.invoiceNumber}</div>
                 <div className="text-[9px] text-slate-400">{completedSale.timestamp}</div>

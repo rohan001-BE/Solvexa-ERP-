@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Solvexa Grocery ERP - Enterprise Management System",
+  title: "Solxa Grocery Store ERP - Enterprise Management System",
   description:
-    "Production-grade Grocery Store ERP with Next.js App Router, Supabase SSR Authentication & PostgreSQL Database",
+    "Production-grade Solxa Grocery Store ERP with Next.js App Router, Supabase SSR Authentication & PostgreSQL Database",
   icons: {
-    icon: "/logo.png",
+    icon: "/solxa-no-bg.png",
     apple: "/logo.png",
   },
 };

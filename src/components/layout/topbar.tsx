@@ -10,7 +10,7 @@ interface TopbarProps {
   currency?: string;
 }
 
-export function Topbar({ storeName = "Solvexa Grocery Store", currency = "PKR" }: TopbarProps) {
+export function Topbar({ storeName = "Solxa Grocery Store", currency = "PKR" }: TopbarProps) {
   const [timeStr, setTimeStr] = useState<string>("");
   const [dateStr, setDateStr] = useState<string>("");
   const [lowStockCount, setLowStockCount] = useState<number>(0);

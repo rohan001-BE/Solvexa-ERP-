@@ -36,19 +36,19 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2.5 group transition-transform duration-150 active:scale-95"
         >
-          <div className="relative h-9 w-9 rounded-xl overflow-hidden bg-white border border-purple-200 shadow-sm flex items-center justify-center p-0.5 flex-shrink-0">
+          <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-2xs flex items-center justify-center p-1 flex-shrink-0">
             <Image
-              src="/logo.png"
-              alt="Solvexa Logo"
-              width={34}
-              height={34}
+              src="/solxa-no-bg.png"
+              alt="Solxa Logo"
+              width={38}
+              height={38}
               className="object-contain"
               priority
             />
           </div>
           <span className="font-extrabold text-lg text-purple-950 tracking-tight flex items-center gap-1 group-hover:text-purple-700 transition-colors">
-            <span>Solvexa</span>
-            <span className="text-amber-600">Store</span>
+            <span>Solxa</span>
+            <span className="text-amber-600">Grocery</span>
           </span>
         </Link>
 
@@ -66,7 +66,7 @@ export function Navbar() {
             className="text-xs font-bold text-slate-700 hover:text-purple-800 transition-colors px-3 py-1.5 rounded-xl hover:bg-purple-50 flex items-center gap-1"
           >
             <Info className="w-3.5 h-3.5 text-purple-600" />
-            <span>About Solvexa</span>
+            <span>About Solxa</span>
           </Link>
 
           {user ? (

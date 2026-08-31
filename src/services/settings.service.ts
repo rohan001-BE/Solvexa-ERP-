@@ -13,8 +13,8 @@ export const settingsService = {
     if (error) {
       return {
         id: true,
-        store_name: "Solvexa Grocery Store",
-        store_address: "Solvexa Main Market, Pakistan",
+        store_name: "Solxa Grocery Store",
+        store_address: "Solxa Main Market, Pakistan",
         store_phone: "+92 300 1234567",
         currency: "PKR",
         default_tax_rate: 0,

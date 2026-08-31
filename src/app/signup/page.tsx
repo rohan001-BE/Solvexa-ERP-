@@ -9,10 +9,10 @@ export default function SignupPage() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 space-y-6">
         <div className="flex flex-col items-center gap-2">
-          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-lg flex items-center justify-center p-1 group hover:scale-105 transition-transform">
+          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-lg flex items-center justify-center p-1.5 group hover:scale-105 transition-transform">
             <Image
-              src="/logo.jpeg"
-              alt="Solvexa Logo"
+              src="/solxa-no-bg.png"
+              alt="Solxa Logo"
               width={60}
               height={60}
               className="object-contain"
@@ -23,7 +23,7 @@ export default function SignupPage() {
             Register Store Profile
           </h1>
           <span className="text-xs text-slate-500 font-medium">
-            Setup administrative access for Solvexa Grocery Store
+            Setup administrative access for Solxa Grocery Store
           </span>
         </div>
 
