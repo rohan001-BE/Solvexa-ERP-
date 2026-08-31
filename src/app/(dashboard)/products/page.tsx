@@ -313,7 +313,7 @@ export default function ProductsPage() {
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-slate-100 overflow-hidden text-purple-900 flex items-center justify-center font-bold flex-shrink-0 border border-purple-200 shadow-2xs relative">
             {p.image_url ? (
-              <Image src={p.image_url} alt={p.name} fill className="object-cover" />
+              <Image src={p.image_url} alt={p.name} fill sizes="40px" className="object-cover" />
             ) : (
               <Package className="w-5 h-5 text-purple-800" />
             )}
@@ -892,7 +892,7 @@ export default function ProductsPage() {
                 <div className="flex gap-3 items-center">
                   <div className="relative w-14 h-14 rounded-2xl bg-slate-100 border-2 border-dashed border-purple-200 flex-shrink-0 overflow-hidden flex items-center justify-center">
                     {imageUrl ? (
-                      <Image src={imageUrl} alt="Product Preview" fill className="object-cover" />
+                      <Image src={imageUrl} alt="Product Preview" fill sizes="56px" className="object-cover" />
                     ) : (
                       <ImageIcon className="w-6 h-6 text-slate-300" />
                     )}

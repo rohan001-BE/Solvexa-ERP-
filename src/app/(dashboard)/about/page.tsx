@@ -12,7 +12,8 @@ import {
   Loader2
 } from "lucide-react";
 import { ProtectedRoute } from "@/components/layout/protected-route";
-import { getCMSContent, CMSContent } from "@/app/actions/cms";
+import { getCMSContent } from "@/app/actions/cms";
+import { CMSContent } from "@/lib/cms-constants";
 
 export default function AboutPage() {
   const [heroContent, setHeroContent] = useState<CMSContent | null>(null);
@@ -67,7 +68,7 @@ export default function AboutPage() {
           <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-white/10 backdrop-blur-md p-4 border border-amber-400/50 shadow-2xl flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform">
             <div className="relative w-full h-full rounded-2xl overflow-hidden bg-white p-2 flex items-center justify-center shadow-inner">
               <Image
-                src="/logo.jpeg"
+                src="/logo.png"
                 alt="Solvexa Emblem"
                 width={140}
                 height={140}

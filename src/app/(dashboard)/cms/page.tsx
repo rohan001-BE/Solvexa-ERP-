@@ -7,8 +7,8 @@ import {
   createCMSPost,
   deleteCMSPost,
   toggleCMSStatus,
-  CMSContent,
 } from "@/app/actions/cms";
+import { CMSContent } from "@/lib/cms-constants";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import {
   LayoutTemplate,
@@ -488,6 +488,7 @@ export default function CMSPage() {
                             src={currentForm.image_url}
                             alt="Banner Preview"
                             fill
+                            sizes="64px"
                             className="object-cover"
                           />
                         ) : (
@@ -549,7 +550,7 @@ export default function CMSPage() {
                             }`}
                           >
                             <div className="relative w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 bg-slate-100">
-                              <Image src={item.url} alt={item.name} fill className="object-cover" />
+                              <Image src={item.url} alt={item.name} fill sizes="28px" className="object-cover" />
                             </div>
                             <span className="text-[10px] truncate flex-1">{item.name}</span>
                           </button>
@@ -701,6 +702,7 @@ export default function CMSPage() {
                             src={currentForm.image_url}
                             alt="Hero Image"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover"
                           />
                         </div>
@@ -751,6 +753,7 @@ export default function CMSPage() {
                               src={currentForm.image_url}
                               alt="Promo Image"
                               fill
+                              sizes="(max-width: 768px) 100vw, 50vw"
                               className="object-cover"
                             />
                           </div>
@@ -790,7 +793,13 @@ export default function CMSPage() {
 
                       {currentForm.image_url && (
                         <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 shadow-md">
-                          <Image src={currentForm.image_url} alt="About Image" fill className="object-cover" />
+                          <Image
+                            src={currentForm.image_url}
+                            alt="About Image"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
+                          />
                         </div>
                       )}
                     </div>
@@ -834,6 +843,7 @@ export default function CMSPage() {
                               src={currentForm.image_url}
                               alt="Card Image"
                               fill
+                              sizes="(max-width: 768px) 100vw, 50vw"
                               className="object-cover"
                             />
                           </div>

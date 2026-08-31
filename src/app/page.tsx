@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { getPublicCMSPosts } from "@/app/actions/cms";
+import { DEFAULT_CMS_POSTS, CMSContent } from "@/lib/cms-constants";
+import { getUnsplashGroceryImage } from "@/lib/unsplash-images";
 import {
   Sparkles,
   ShoppingBag,
@@ -21,8 +23,6 @@ import {
   UserCheck,
   Star
 } from "lucide-react";
-
-import { getUnsplashGroceryImage } from "@/lib/unsplash-images";
 
 export const dynamic = "force-dynamic";
 
@@ -50,47 +50,12 @@ export default async function HomePage() {
     image_url: p.image_url || getUnsplashGroceryImage(p.name, p.category?.name),
   }));
 
-  // Categorize CMS posts
-  const heroPost = cmsPosts.find((p) => p.section_key === "hero") || {
-    title: "Fresh Groceries Delivered Daily to Your Doorstep",
-    subtitle: "Solvexa Supermarket & Grocery ERP",
-    content_body: "Explore high quality organic farm produce, fresh dairy, bakery goods, and everyday household essentials at wholesale prices with instant express checkout.",
-    badge: "100% Organic & Farm Fresh",
-    image_url: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop&q=80",
-    button_text: "Explore Products",
-    button_url: "/products",
-  };
-
-  const promoPost = cmsPosts.find((p) => p.section_key === "promo_banner") || {
-    title: "Ramadan & Weekly Mega Savings Discount",
-    subtitle: "Save up to 30% on All Pantry Essentials",
-    content_body: "Stock up on premium Basmati rice, cold-pressed cooking oils, farm fresh eggs, and golden bakery biscuits. Limited time discounts applied across all store aisles.",
-    badge: "Special Store Promotion",
-    image_url: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=1200&auto=format&fit=crop&q=80",
-    button_text: "Shop Savings",
-    button_url: "/products",
-  };
-
-  const featurePost = cmsPosts.find((p) => p.section_key === "feature_fresh") || {
-    title: "Guaranteed 100% Farm Fresh Harvest",
-    subtitle: "Handpicked Daily from Local Farmers",
-    content_body: "Our fruits and vegetables are sourced early every morning from certified pesticide-free farms to ensure unbeatable nutrition, crispness, and rich natural taste.",
-    badge: "Direct Farm Supply",
-    image_url: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80",
-  };
-
-  const aboutPost = cmsPosts.find((p) => p.section_key === "about") || {
-    title: "Solving Grocery Logistics & Modern Retail Management",
-    subtitle: "Built with Royal Purple Heritage & Golden Margins",
-    content_body: "Solvexa Grocery ERP is an enterprise-grade retail platform engineered for high-volume inventory management, double-entry financial ledger accounting, and rapid barcode POS checkout.",
-    badge: "Store Architecture",
-  };
-
-  const contactPost = cmsPosts.find((p) => p.section_key === "contact") || {
-    title: "Store Location, Helpline & Customer Support Desk",
-    subtitle: "We are Available 7 Days a Week (8:00 AM - 11:00 PM)",
-    content_body: "Visit our flagship supermarket store or contact our centralized billing desk for bulk institutional orders and wholesale supply contracts.",
-  };
+  // Categorize CMS posts with typed fallbacks
+  const heroPost = cmsPosts.find((p) => p.section_key === "hero") || DEFAULT_CMS_POSTS[0];
+  const promoPost = cmsPosts.find((p) => p.section_key === "promo_banner") || DEFAULT_CMS_POSTS[1];
+  const featurePost = cmsPosts.find((p) => p.section_key === "feature_fresh") || DEFAULT_CMS_POSTS[2];
+  const aboutPost = cmsPosts.find((p) => p.section_key === "about") || DEFAULT_CMS_POSTS[3];
+  const contactPost = cmsPosts.find((p) => p.section_key === "contact") || DEFAULT_CMS_POSTS[4];
 
   // Other custom CMS posts created by admin
   const otherPosts = cmsPosts.filter(
@@ -228,6 +193,7 @@ export default async function HomePage() {
                     src={heroPost.image_url || "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop&q=80"}
                     alt="Solvexa Grocery Produce"
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     priority
                   />
@@ -285,6 +251,7 @@ export default async function HomePage() {
                       src={promoPost.image_url}
                       alt={promoPost.title || "Promo Deal"}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -340,6 +307,7 @@ export default async function HomePage() {
                         src={product.image_url}
                         alt={product.name}
                         fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
@@ -399,7 +367,13 @@ export default async function HomePage() {
                   <div className="space-y-3">
                     {post.image_url && (
                       <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200">
-                        <Image src={post.image_url} alt={post.title || "Post"} fill className="object-cover" />
+                        <Image
+                          src={post.image_url}
+                          alt={post.title || "Post"}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover"
+                        />
                       </div>
                     )}
                     {post.badge && (

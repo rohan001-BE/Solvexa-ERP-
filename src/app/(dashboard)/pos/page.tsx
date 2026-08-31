@@ -340,7 +340,13 @@ export default function POSPage() {
 
                     <div className="w-full aspect-square rounded-xl bg-slate-50 mb-2.5 relative overflow-hidden border border-slate-100 flex items-center justify-center">
                       {product.image_url ? (
-                        <Image src={product.image_url} alt={product.name} fill className="object-contain p-1" />
+                        <Image
+                          src={product.image_url}
+                          alt={product.name}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                          className="object-contain p-1"
+                        />
                       ) : (
                         <Tag className="w-8 h-8 text-slate-300 group-hover:text-purple-400 transition-colors" />
                       )}
