@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/client";
-import { Supplier } from "@/types/database.types";
+import { Supplier, Purchase, Payment } from "@/types/database.types";
 
 export const suppliersService = {
   async getSuppliers() {
@@ -19,7 +19,8 @@ export const suppliersService = {
       .from("suppliers")
       .insert({
         name: supplier.name,
-        company_name: supplier.company_name || supplier.contact_person || null,
+        company_name: supplier.company_name || supplier.name,
+        contact_person: supplier.contact_person || null,
         phone: supplier.phone || null,
         email: supplier.email || null,
         address: supplier.address || null,
@@ -40,7 +41,8 @@ export const suppliersService = {
       .from("suppliers")
       .update({
         name: updates.name,
-        company_name: updates.company_name || updates.contact_person || null,
+        company_name: updates.company_name || updates.name,
+        contact_person: updates.contact_person || null,
         phone: updates.phone || null,
         email: updates.email || null,
         address: updates.address || null,
@@ -67,7 +69,7 @@ export const suppliersService = {
 
     const { data: purchases } = await supabase
       .from("purchases")
-      .select("*")
+      .select("*, items:purchase_items(*, product:products(*))")
       .eq("supplier_id", id)
       .order("created_at", { ascending: false });
 
@@ -79,8 +81,8 @@ export const suppliersService = {
 
     return {
       supplier: supplier as Supplier,
-      purchases: purchases || [],
-      payments: payments || [],
+      purchases: (purchases || []) as Purchase[],
+      payments: (payments || []) as Payment[],
     };
   },
 };
