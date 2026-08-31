@@ -74,10 +74,10 @@ npm install
 ### 3. Environment Variables Setup
 Create `.env.local` in the root directory:
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://eptifegytprrzumltjce.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_XLuFxps4qyoqqrb7bLF4GQ_MWy26wHf
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_XLuFxps4qyoqqrb7bLF4GQ_MWy26wHf
-SUPABASE_PROJECT_ID=eptifegytprrzumltjce
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+SUPABASE_PROJECT_ID=
 ```
 
 ### 4. Run Development Server
