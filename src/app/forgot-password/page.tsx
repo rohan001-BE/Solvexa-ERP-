@@ -38,9 +38,9 @@ export default function ForgotPasswordPage() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 space-y-6">
         <div className="flex flex-col items-center gap-2">
-          <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-purple-950/5 border border-purple-200/80 shadow-md flex items-center justify-center p-1">
+          <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-white border border-purple-200 shadow-md flex items-center justify-center p-1">
             <Image
-              src="/solxa-no-bg.png"
+              src="/logo.png"
               alt="Solxa Logo"
               width={52}
               height={52}
