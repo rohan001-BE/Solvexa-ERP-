@@ -413,7 +413,7 @@ export default function InventoryPage() {
               </p>
             </div>
             <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner flex-shrink-0">
-              <DollarSign className="w-5 h-5 text-amber-100" />
+              <span className="font-black text-sm text-amber-100">PKR</span>
             </div>
           </div>
           <div className="relative z-10 mt-4 flex items-center gap-2 text-[10px] font-bold text-amber-100/70 bg-black/20 w-max px-2.5 py-1 rounded-lg backdrop-blur-sm border border-white/5">
