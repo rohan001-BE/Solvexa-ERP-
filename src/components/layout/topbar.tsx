@@ -36,7 +36,7 @@ export function Topbar({ storeName = "Solxa Grocery Store", currency = "PKR" }: 
       {/* Left: Store Branding & Live Clock */}
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2 text-xs font-black text-purple-950 bg-purple-50/80 border border-purple-200 px-3 py-1.5 rounded-xl shadow-2xs">
-          <Store className="w-4 h-4 text-purple-700" />
+          <img src="/logo.png" alt="Store Logo" className="w-5 h-5 object-contain" />
           <span className="font-bold">{storeName}</span>
           <span className="text-[10px] bg-amber-100 text-amber-900 border border-amber-300 px-1.5 py-0.5 rounded font-mono font-bold">
             {currency}
